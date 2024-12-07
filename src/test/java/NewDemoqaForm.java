@@ -54,6 +54,7 @@ public class NewDemoqaForm {
         $("#react-select-4-input").setValue("Merrut").pressEnter();
         $("#submit").click();
 
+
         $(".table-responsive").$(byText("Student Name")).sibling(0).shouldHave(text("Arsen Mukhametkulov"));
         $(".table-responsive").$(byText("Student Email")).sibling(0).shouldHave(text("Azarsen1@mail.com"));
         $(".table-responsive").$(byText("Gender")).sibling(0).shouldHave(text("Male"));
