@@ -17,22 +17,15 @@ public class NewDemoqaForm {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = false;
         Configuration.timeout = 1000;
     }
 
     @Test
      void fillFormTest() {
         open("/automation-practice-form");
-
-        executeJavaScript("document.getElementById('fixedban').style.display = 'none';");
+        executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
-        switchTo().frame("google_ads_iframe_/21849154601,22343295815/Ad.Plus-970x250-1_0");
-        executeJavaScript("document.body.innerHTML = '';");
-        switchTo().defaultContent();
-
-        SelenideElement button = $("#submit");
-        $("#submit").scrollTo().click();
         Configuration.pageLoadStrategy = "eager";
         $("#firstName").setValue("Arsen");
         $("#lastName").setValue("Mukhametkulov");
@@ -46,7 +39,7 @@ public class NewDemoqaForm {
         $("#subjectsInput").setValue("Maths");
         $$(".subjects-auto-complete__menu-list div").findBy(text("Maths")).click();
         $("#hobbies-checkbox-2").parent().click();
-        $("#uploadPicture").uploadFile(new File("/Users/arsenmukhametkulov/Desktop/AGE_TEST.jpg"));
+        $("#uploadPicture").uploadFromClasspath("AGE_TEST.jpg");
         $("#currentAddress").setValue("Yangixayot 8");
         $("#state").click();
         $("#react-select-3-input").setValue("Uttar Pradesh").pressEnter();
