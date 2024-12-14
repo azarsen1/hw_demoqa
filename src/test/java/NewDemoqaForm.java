@@ -18,7 +18,6 @@ public class NewDemoqaForm {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         Configuration.holdBrowserOpen = false;
-        Configuration.timeout = 1000;
     }
 
     @Test
@@ -26,7 +25,6 @@ public class NewDemoqaForm {
         open("/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
-        Configuration.pageLoadStrategy = "eager";
         $("#firstName").setValue("Arsen");
         $("#lastName").setValue("Mukhametkulov");
         $("#userEmail").setValue("Azarsen1@mail.com");
