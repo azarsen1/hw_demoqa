@@ -1,26 +1,26 @@
+package tests;
+
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.io.File;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class NewDemoqaForm {
+public class NewDemoqaFormTest {
 
-    @BeforeAll
-    static void beforeAll() {
+
+     @BeforeAll
+     static void beforeAll() {
         Configuration.webdriverLogsEnabled = true;
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         Configuration.holdBrowserOpen = false;
-    }
+     }
 
-    @Test
+     @Test
      void fillFormTest() {
         open("/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
@@ -28,7 +28,7 @@ public class NewDemoqaForm {
         $("#firstName").setValue("Arsen");
         $("#lastName").setValue("Mukhametkulov");
         $("#userEmail").setValue("Azarsen1@mail.com");
-        $("#gender-radio-1").parent().click();
+        $("#genterWrapper").$(byText("Other")).click();
         $("#userNumber").setValue("8937341615");
         $("#dateOfBirthInput").click();
         $("select.react-datepicker__year-select").selectOption("1996");
