@@ -1,6 +1,8 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pages.components.CalendarComponent;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -11,6 +13,9 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 
 public class NewDemoqaFormPage {
+
+    private static final Logger logger = LoggerFactory.getLogger(NewDemoqaFormPage.class);
+
 
     SelenideElement firstNameInput = $("#firstName");
     SelenideElement lastNameInput = $("#lastName");
@@ -30,9 +35,11 @@ public class NewDemoqaFormPage {
 
     public NewDemoqaFormPage openPage() {
         open("/automation-practice-form");
+        logger.info("Открытие формы: https://demoqa.com/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         $("#fixedban").shouldBe(visible);
         $("footer").shouldBe(visible);
+        logger.info("Удаление баннеров со страницы");
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
         return this;
@@ -92,17 +99,28 @@ public class NewDemoqaFormPage {
     }
 
     public NewDemoqaFormPage setState(String value) {
-        stateInput.setValue(value).click();
+        stateInput.click();
+        $("#react-select-3-input").setValue(value).pressEnter();
         return this;
     }
 
     public NewDemoqaFormPage setCity(String value) {
-        cityInput.setValue(value).click();
+        cityInput.click();
+        $("#react-select-4-input").setValue(value).pressEnter();
         return this;
     }
 
     public NewDemoqaFormPage clickSubmit() {
         buttonSubmit.click();
+        return this;
+
+
+    }
+
+    public NewDemoqaFormPage checkResult(String key, String value) {
+        $(".table-responsive").$(byText(key)).parent()
+                .shouldHave(text(value));
+
         return this;
     }
 

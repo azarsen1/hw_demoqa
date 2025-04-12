@@ -25,6 +25,37 @@ public class NewDemoqaFormWithPageObjectTest extends TestBase {
                 .setCity("Merrut")
                 .clickSubmit();
 
+        newDemoqaFormPage.checkResult("Student Name", "Arsen Mukhametkulov")
+                .checkResult("Student Email", "arsen@mail.ru")
+                .checkResult("Gender", "Male")
+                .checkResult("Mobile", "8937342615")
+                .checkResult("Date of Birth", "21 April,1996")
+                .checkResult("Subjects", "Maths")
+                .checkResult("Hobbies", "Sports")
+                .checkResult("Picture", "AGE_TEST.jpg")
+                .checkResult("Address", "Yangixayot 8")
+                .checkResult("State and City", "Uttar Pradesh Merrut");
+
+
+    }
+
+    @Test
+    void minFillFormTestTest() {
+        newDemoqaFormPage.openPage()
+                .setFirstName("A")
+                .setLastName("A")
+                .setUserEmail("a@m.r")
+                .setGender("Male")
+                .setUserNumber("8937342615")
+                .setDateOfBirth("21", "April", "1996")
+                .clickSubmit();
+
+        newDemoqaFormPage.checkResult("Student Name", "A A")
+                .checkResult("Student Email", "a@m.r")
+                .checkResult("Gender", "Male")
+                .checkResult("Mobile", "8937342615")
+                .checkResult("Date of Birth", "21 April,1996");
+
 
     }
 
