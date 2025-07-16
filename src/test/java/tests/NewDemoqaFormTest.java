@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class NewDemoqaFormTest {
+ class NewDemoqaFormTest {
 
 
      @BeforeAll
@@ -21,7 +21,7 @@ public class NewDemoqaFormTest {
      }
 
      @Test
-     void fillFormTest() {
+     void registrationFullTest() {
         open("/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
@@ -33,7 +33,8 @@ public class NewDemoqaFormTest {
         $("#dateOfBirthInput").click();
         $("select.react-datepicker__year-select").selectOption("1996");
         $("select.react-datepicker__month-select").selectOption("April");
-        $$(".react-datepicker__day").findBy(text("21")).click();
+        $$(".react-datepicker__day:not(.react-datepicker__day--outside-month)")
+                .findBy(text("21")).click();
         $("#subjectsInput").setValue("Maths");
         $$(".subjects-auto-complete__menu-list div").findBy(text("Maths")).click();
         $("#hobbies-checkbox-2").parent().click();

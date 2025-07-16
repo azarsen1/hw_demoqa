@@ -11,7 +11,7 @@ repositories {
 
 dependencies {
     testImplementation(
-            'com.codeborne:selenide:6.19.1',
+             'com.codeborne:selenide:7.9.4',
             'org.junit.jupiter:junit-jupiter:5.10.0',
             'org.slf4j:slf4j-simple:2.0.7'
     )
@@ -19,4 +19,21 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21) // фиксируем Java 17
+    }
+}
+
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs << "-Xlint:deprecation"
 }

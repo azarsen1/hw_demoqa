@@ -1,5 +1,6 @@
 package pages;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Condition.value;
 
 
 public class NewDemoqaFormPage {
@@ -37,6 +39,11 @@ public class NewDemoqaFormPage {
         open("/automation-practice-form");
         logger.info("Открытие формы: https://demoqa.com/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+        return this;
+    }
+
+
+    public NewDemoqaFormPage removeBanner() {
         $("#fixedban").shouldBe(visible);
         $("footer").shouldBe(visible);
         logger.info("Удаление баннеров со страницы");
@@ -44,6 +51,7 @@ public class NewDemoqaFormPage {
         executeJavaScript("$('footer').remove()");
         return this;
     }
+
 
     public NewDemoqaFormPage setFirstName(String value) {
         firstNameInput.setValue(value);
@@ -89,7 +97,7 @@ public class NewDemoqaFormPage {
     }
 
     public NewDemoqaFormPage setUploadPicture(String value) {
-        uploadPictureInput.uploadFromClasspath("AGE_TEST.jpg");
+        uploadPictureInput.uploadFromClasspath(value);
         return this;
     }
 
@@ -123,6 +131,46 @@ public class NewDemoqaFormPage {
 
         return this;
     }
+    public NewDemoqaFormPage shouldHaveFirstName(String expectedValue) {
 
+        if (expectedValue.isEmpty()) {
+            firstNameInput.shouldBe(Condition.empty);
+        } else {
+            firstNameInput.shouldHave(Condition.value(expectedValue));
+        }
 
+        return this;
+    }
+
+    public NewDemoqaFormPage shouldHaveLastName(String expectedValue) {
+
+        if (expectedValue.isEmpty()) {
+            lastNameInput.shouldBe(Condition.empty);
+        } else {
+            lastNameInput.shouldHave(Condition.value(expectedValue));
+        }
+        return this;
+    }
+
+    public NewDemoqaFormPage shouldHaveUserEmail(String expectedValue) {
+
+        if (expectedValue.isEmpty()) {
+            userEmailInput.shouldBe(Condition.empty);
+        } else {
+            userEmailInput.shouldHave(Condition.value(expectedValue));
+        }
+        return this;
+    }
+
+    public NewDemoqaFormPage shouldHaveGender(String expectedValue) {
+        genderRadioButton.$("input[name='gender'][value='" + expectedValue + "']")
+                .shouldBe(Condition.selected);
+
+        return this;
+    }
+
+    public NewDemoqaFormPage shouldHaveDateOfBirth(String expectedDate) {
+        $("#dateOfBirthInput").shouldHave(Condition.value(expectedDate));
+        return this;
+    }
 }

@@ -2,7 +2,6 @@ package tests;
 
 import org.junit.jupiter.api.Test;
 import pages.NewDemoqaFormPage;
-import pages.TestBase;
 
 public class NewDemoqaFormWithPageObjectTest extends TestBase {
 
@@ -11,6 +10,7 @@ public class NewDemoqaFormWithPageObjectTest extends TestBase {
     @Test
     void smokeFillFormTest() {
         newDemoqaFormPage.openPage()
+                .removeBanner()
                 .setFirstName("Arsen")
                 .setLastName("Mukhametkulov")
                 .setUserEmail("arsen@mail.ru")
@@ -42,16 +42,17 @@ public class NewDemoqaFormWithPageObjectTest extends TestBase {
     @Test
     void minFillFormTestTest() {
         newDemoqaFormPage.openPage()
+                .removeBanner()
                 .setFirstName("A")
                 .setLastName("A")
-                .setUserEmail("a@m.r")
+                .setUserEmail("a@m.ru")
                 .setGender("Male")
                 .setUserNumber("8937342615")
                 .setDateOfBirth("21", "April", "1996")
                 .clickSubmit();
 
         newDemoqaFormPage.checkResult("Student Name", "A A")
-                .checkResult("Student Email", "a@m.r")
+                .checkResult("Student Email", "a@m.ru")
                 .checkResult("Gender", "Male")
                 .checkResult("Mobile", "8937342615")
                 .checkResult("Date of Birth", "21 April,1996");
@@ -59,5 +60,24 @@ public class NewDemoqaFormWithPageObjectTest extends TestBase {
 
     }
 
+    @Test
+    void negativeFillFormTestTest() {
+        newDemoqaFormPage.openPage()
+                .removeBanner()
+                .setFirstName("")
+                .setLastName("A")
+                .setUserEmail("a@m.ru")
+                .setGender("Male")
+                .setUserNumber("8937342615")
+                .setDateOfBirth("21", "April", "1996")
+                .clickSubmit();
+
+        newDemoqaFormPage.shouldHaveFirstName("")
+                         .shouldHaveLastName("A")
+                         .shouldHaveUserEmail("a@m.ru")
+                         .shouldHaveGender("Male")
+                         .shouldHaveDateOfBirth("21 Apr 1996")
+        ;
+    }
 
 }
