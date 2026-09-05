@@ -8,18 +8,18 @@ group = 'com.azarsen4'
 version = '1.0-SNAPSHOT'
 
 allure {
+    version = "2.29.0" // Рабочая стабильная версия Allure CLI
     allureReport {
-        version.set("2.44.1")
+        clean = true
     }
     adapter {
-        aspectjWeaver.set(true)
+        aspectjWeaver = true
         frameworks {
             junit5 {
-                adapterVersion.set("2.35.3")
+                adapterVersion = "2.29.0"
             }
         }
     }
-
 }
 repositories {
     mavenCentral()
