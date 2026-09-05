@@ -8,12 +8,12 @@ import pages.NewDemoqaFormPage;
 
 
 
-@Tag("demoqa")
+
 public class NewDemoqaFormWithPageObjectTest extends TestBase {
 
 
     NewDemoqaFormPage newDemoqaFormPage = new NewDemoqaFormPage();
-
+    @Tag("demoqa")
     @Test
     void smokeFillFormTest() {
         newDemoqaFormPage.openPage()
@@ -46,6 +46,7 @@ public class NewDemoqaFormWithPageObjectTest extends TestBase {
 
     }
 
+    @Tag("demoqa")
     @Test
     void minFillFormTestTest() {
         newDemoqaFormPage.openPage()
@@ -66,7 +67,7 @@ public class NewDemoqaFormWithPageObjectTest extends TestBase {
 
 
     }
-
+    @Tag("demoqa")
     @Test
     void negativeFillFormTestTest() {
         newDemoqaFormPage.openPage()
