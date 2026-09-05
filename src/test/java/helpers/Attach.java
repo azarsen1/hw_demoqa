@@ -6,6 +6,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
@@ -46,7 +47,7 @@ public class Attach {
     public static URL getVideoUrl() {
         String videoUrl = "https://" + System.getProperty("remoteHost") + "/video/" + sessionId() + ".mp4";
         try {
-            return new URL(videoUrl);
+            return URI.create(videoUrl).toURL();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

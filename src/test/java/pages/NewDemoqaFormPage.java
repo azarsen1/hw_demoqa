@@ -45,11 +45,8 @@ public class NewDemoqaFormPage {
 
     @Step("Удаляем баннер")
     public NewDemoqaFormPage removeBanner() {
-        $("#fixedban").shouldBe(visible);
-        $("footer").shouldBe(visible);
-        logger.info("Удаление баннеров со страницы");
-        executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('footer').remove()");
+        executeJavaScript("document.querySelector('#fixedban')?.remove();");
+        executeJavaScript("document.querySelector('footer')?.remove();");
         return this;
     }
 
