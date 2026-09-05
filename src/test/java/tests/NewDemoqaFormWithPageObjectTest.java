@@ -1,9 +1,16 @@
 package tests;
 
+import helpers.Attach;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.NewDemoqaFormPage;
 
+
+
+@Tag("demoqa")
 public class NewDemoqaFormWithPageObjectTest extends TestBase {
+
 
     NewDemoqaFormPage newDemoqaFormPage = new NewDemoqaFormPage();
 

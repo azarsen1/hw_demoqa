@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pages.components.CalendarComponent;
@@ -34,7 +35,7 @@ public class NewDemoqaFormPage {
     SelenideElement buttonSubmit = $("#submit");
 
     CalendarComponent calendarComponent = new CalendarComponent();
-
+    @Step("Открываем страницу")
     public NewDemoqaFormPage openPage() {
         open("/automation-practice-form");
         logger.info("Открытие формы: https://demoqa.com/automation-practice-form");
@@ -42,7 +43,7 @@ public class NewDemoqaFormPage {
         return this;
     }
 
-
+    @Step("Удаляем баннер")
     public NewDemoqaFormPage removeBanner() {
         $("#fixedban").shouldBe(visible);
         $("footer").shouldBe(visible);
@@ -52,85 +53,87 @@ public class NewDemoqaFormPage {
         return this;
     }
 
-
+    @Step("Заполняем имя")
     public NewDemoqaFormPage setFirstName(String value) {
         firstNameInput.setValue(value);
         return this;
     }
-
+    @Step("Заполняем фамилию")
     public NewDemoqaFormPage setLastName(String value) {
         lastNameInput.setValue(value);
         return this;
     }
-
+    @Step("Заполняем Email")
     public NewDemoqaFormPage setUserEmail(String value) {
         userEmailInput.setValue(value);
         return this;
     }
-
+    @Step("Выбираем пол")
     public NewDemoqaFormPage setGender(String value) {
         genderRadioButton.$(byText(value)).click();
         return this;
     }
-
+    @Step("Заполняем номер")
     public NewDemoqaFormPage setUserNumber(String value) {
         userNumberInput.setValue(value);
         return this;
     }
-
+    @Step("Выбираем дату рождения")
     public NewDemoqaFormPage setDateOfBirth(String day, String month, String year) {
         dateOfBirthInput.click();
         calendarComponent.setDate(day, month, year);
 
         return this;
     }
-
+    @Step("Выбираем предмет")
     public NewDemoqaFormPage setSubjects(String value) {
         subjectsInput.setValue(value);
         $$(".subjects-auto-complete__menu-list div").findBy(text(value)).click();
         return this;
     }
-
+    @Step("Выбираем хобби")
     public NewDemoqaFormPage setHobbiesCheckbox(String value) {
         hobbiesCheckbox.$(byText(value)).click();
         return this;
     }
-
+    @Step("Загружаем картинку")
     public NewDemoqaFormPage setUploadPicture(String value) {
         uploadPictureInput.uploadFromClasspath(value);
         return this;
     }
-
+    @Step("Заполняем адрес")
     public NewDemoqaFormPage setCurrentAddress(String value) {
         currentAddress.setValue(value);
         return this;
     }
-
+    @Step("Выбираем штат")
     public NewDemoqaFormPage setState(String value) {
         stateInput.click();
         $("#react-select-3-input").setValue(value).pressEnter();
         return this;
     }
-
+    @Step("Выбираем город")
     public NewDemoqaFormPage setCity(String value) {
         cityInput.click();
         $("#react-select-4-input").setValue(value).pressEnter();
         return this;
     }
-
+    @Step("Нажимает на кнопку \"Submit\"")
     public NewDemoqaFormPage clickSubmit() {
         buttonSubmit.click();
         return this;
 
 
     }
-
+    @Step("Проверяем поле {key} с ведёнными данными {value}")
     public NewDemoqaFormPage checkResult(String key, String value) {
         $(".table-responsive").$(byText(key)).parent()
                 .shouldHave(text(value));
 
         return this;
     }
+
+    @Step("Проверить, что в поле First Name отображается значение '{0}'")
     public NewDemoqaFormPage shouldHaveFirstName(String expectedValue) {
 
         if (expectedValue.isEmpty()) {
@@ -142,6 +145,7 @@ public class NewDemoqaFormPage {
         return this;
     }
 
+    @Step("Проверить, что в поле Last Name отображается значение '{0}'")
     public NewDemoqaFormPage shouldHaveLastName(String expectedValue) {
 
         if (expectedValue.isEmpty()) {
@@ -152,6 +156,7 @@ public class NewDemoqaFormPage {
         return this;
     }
 
+    @Step("Проверить, что в поле User Email отображается значение '{0}'")
     public NewDemoqaFormPage shouldHaveUserEmail(String expectedValue) {
 
         if (expectedValue.isEmpty()) {
@@ -162,6 +167,7 @@ public class NewDemoqaFormPage {
         return this;
     }
 
+    @Step("Проверить, что в поле Gender отображается значение '{0}'")
     public NewDemoqaFormPage shouldHaveGender(String expectedValue) {
         genderRadioButton.$("input[name='gender'][value='" + expectedValue + "']")
                 .shouldBe(Condition.selected);
@@ -169,6 +175,7 @@ public class NewDemoqaFormPage {
         return this;
     }
 
+    @Step("Проверить, что в поле Date of Birth отображается значение '{0}'")
     public NewDemoqaFormPage shouldHaveDateOfBirth(String expectedDate) {
         $("#dateOfBirthInput").shouldHave(Condition.value(expectedDate));
         return this;
