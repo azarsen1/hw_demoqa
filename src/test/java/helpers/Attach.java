@@ -38,19 +38,16 @@ public class Attach {
     }
 
     @Attachment(value = "Video", type = "text/html", fileExtension = ".html")
-    public static String addVideo() {
+    public static String addVideo(String sessionId) {
         return "<html><body><video width='100%' height='100%' controls autoplay><source src='"
-                + getVideoUrl()
+                + getVideoUrl(sessionId)
                 + "' type='video/mp4'></video></body></html>";
     }
 
-    public static URL getVideoUrl() {
-        String videoUrl = "https://" + System.getProperty("remoteHost") + "/video/" + sessionId() + ".mp4";
-        try {
-            return URI.create(videoUrl).toURL();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public static String getVideoUrl(String sessionId) {
+
+        String remoteHost = System.getProperty("remoteHost", "selenoid.qa.guru");
+        return "https://" + remoteHost + "/video/" + sessionId() + ".mp4";
+
     }
 }
