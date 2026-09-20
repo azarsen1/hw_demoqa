@@ -23,7 +23,7 @@ public class TestBase {
         Configuration.remote = "https://user1:1234@" + remoteHost + "/wd/hub";
         Configuration.pageLoadStrategy = "eager";
         Configuration.browser = System.getProperty("browser", "chrome");
-        Configuration.browserVersion = System.getProperty("browserVersion", "151.0"); // Или "100.0"
+        Configuration.browserVersion = System.getProperty("browserVersion", "152.0"); // Или "100.0"
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.of(
