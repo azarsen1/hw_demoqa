@@ -40,24 +40,21 @@ public class TestBase {
     }
 
 
+
     @AfterEach
     void afterEach() {
         if (WebDriverRunner.hasWebDriverStarted()) {
             String sessionId = Selenide.sessionId().toString();
 
-            try {
-                Attach.screenshotAs("Last screenshot");
-                Attach.pageSource();
-                Attach.browserConsoleLogs();
-            } catch (Exception e) {
-            }
+            Attach.screenshotAs("Last screenshot");
+            Attach.pageSource();
+            Attach.browserConsoleLogs();
 
+            // 1. Сначала забираем видео, пока контейнер еще жив на Селеноиде
+            Attach.addVideo(sessionId);
+
+            // 2. И только потом гасим драйвер
             Selenide.closeWebDriver();
-
-            try {
-                Attach.addVideo(sessionId);
-            } catch (Exception e) {
-            }
         }
     }
 
