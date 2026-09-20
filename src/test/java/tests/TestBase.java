@@ -44,14 +44,17 @@ public class TestBase {
     void afterEach() {
         if (WebDriverRunner.hasWebDriverStarted()) {
             String sessionId = Selenide.sessionId().toString();
-            Attach.screenshotAs("Last screenshot");
-            Attach.attachAsText("Тест", "Проверка вложений");
-            Attach.pageSource();
-            Attach.browserConsoleLogs();
+
+            try {
+                Attach.screenshotAs("Last screenshot");
+                Attach.pageSource();
+                Attach.browserConsoleLogs();
+            } catch (Exception e) {
+            }
+
             Selenide.closeWebDriver();
             Attach.addVideo(sessionId);
         }
-
     }
 
 
