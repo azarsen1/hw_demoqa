@@ -124,7 +124,7 @@ public class NewDemoqaFormPage {
     }
     @Step("Проверяем поле {key} с ведёнными данными {value}")
     public NewDemoqaFormPage checkResult(String key, String value) {
-        $(".table-responsive").$(byText(key)).parent()
+        $(".modal-content .table-responsive").$(byText(key)).parent()
                 .shouldHave(text(value));
 
         return this;
