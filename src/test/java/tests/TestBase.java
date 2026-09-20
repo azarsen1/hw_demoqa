@@ -53,7 +53,11 @@ public class TestBase {
             }
 
             Selenide.closeWebDriver();
-            Attach.addVideo(sessionId);
+
+            try {
+                Attach.addVideo(sessionId);
+            } catch (Exception e) {
+            }
         }
     }
 
