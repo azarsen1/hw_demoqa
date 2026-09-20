@@ -22,6 +22,8 @@ public class TestBase {
         String remoteHost = System.getProperty("remoteHost", "selenoid.qa.guru");
         Configuration.remote = "https://user1:1234@" + remoteHost + "/wd/hub";
         Configuration.pageLoadStrategy = "eager";
+        Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
+        Configuration.browserVersion = System.getProperty("browserVersion", "152.0");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.of(
                 "enableVNC", true,
