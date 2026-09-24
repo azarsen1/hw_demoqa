@@ -27,7 +27,9 @@ public class TestBase {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.of(
                 "enableVNC", true,
-                "enableVideo", true
+                "enableVideo", true,
+                "enableFileUpload", true
+
         ));
 
         Configuration.browserCapabilities = capabilities;
@@ -50,10 +52,8 @@ public class TestBase {
             Attach.pageSource();
             Attach.browserConsoleLogs();
 
-            // 1. Сначала забираем видео, пока контейнер еще жив на Селеноиде
             Attach.addVideo(sessionId);
 
-            // 2. И только потом гасим драйвер
             Selenide.closeWebDriver();
         }
     }
